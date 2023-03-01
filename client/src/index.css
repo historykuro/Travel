@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+ 
 
 
 
@@ -14,10 +14,24 @@
     scroll-behavior: smooth;
 }
 
+.font-display{
+  font-family: 'Playfair Display', 'serif';
+}
 
 .slick-slide > div {
   margin: 0 10px;
 }
 .slick-list {
   margin: 0 -10px;
+}
+
+.slick-dots{
+      position: absolute;
+    bottom: 20px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
 }

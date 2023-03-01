@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const RoomSchema = new mongoose.Schema(
   {
@@ -26,6 +26,7 @@ const RoomSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
     review: {
       type: Number,
       required: true,
@@ -36,6 +37,19 @@ const RoomSchema = new mongoose.Schema(
       type: [Number],
       default: [],
     },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
+
+    // comments: [
+    //   {
+    //     type: [String],
+    //     default: {},
+    //   },
+    // ],
   },
   { timestamps: true }
 );

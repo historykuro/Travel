@@ -8,3 +8,6 @@ export { default as TypeDetail } from "./TypeDetail";
 export { default as Types } from "./Types";
 export { default as SuggestedPlaces } from "./SuggestedPlaces";
 export { default as Update } from "./Update";
+export { default as Places } from "./Places";
+export { default as ListPlaces } from "./ListPlaces";
+export { default as CommentSection } from "./CommentSection";

@@ -1,6 +1,7 @@
 import { Routes, Route, Link } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import "flowbite";
 
 import {
   Home,
@@ -10,6 +11,7 @@ import {
   Type,
   TypeDetail,
   Update,
+  ListPlaces,
 } from "./Pages";
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
 
           <Route path="/types/:type" element={<Type />} />
           <Route path="/typeDetail/:id" element={<TypeDetail />} />
+          <Route path="/list" element={<ListPlaces />} />
         </Routes>
         <Footer />
       </>

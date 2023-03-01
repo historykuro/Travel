@@ -28,11 +28,11 @@ const Types = () => {
       }
     };
     fetchTypes();
-  }, [types]);
+  }, []);
 
   return (
-    <section className=" h-full w-full my-[10rem]   ">
-      <div className="wrapper h-full w-[90%] mx-auto my-0 ">
+    <section className=" h-full w-full my-[10rem]   border-b ">
+      <div className="wrapper h-full  mx-auto my-0 ">
         <div className="titles flex flex-col items-center justify-center gap-3 mb-[4rem]">
           <h5 className="subtitle text-[#333] text-[22px] font-[500] ">
             Residing place
@@ -41,7 +41,7 @@ const Types = () => {
             What type of place you want
           </h2>
         </div>
-        <div className="types grid grid-cols-4 gap-x-[1.5rem]">
+        {/* <div className="types grid grid-cols-4 gap-x-[1.5rem] ">
           {Object.entries(types).map(([key, value]) => (
             <Link
               to={`/types/${key}`}
@@ -67,6 +67,35 @@ const Types = () => {
               <span className="absolute bottom-0 left-0 text-[#fff] text-[20px] bg-bg-main px-[1.3rem] py-[4px] rounded-tr-md">
                 {key} {value}
               </span>
+            </Link>
+          ))}
+        </div> */}
+        <div className="flex flex-wrap bg-black">
+          {Object.entries(types).map(([key, value]) => (
+            <Link
+              to={`/types/${key}`}
+              key={key + value}
+              className="bg-black relative w-full md:w-auto md:flex-1 flex items-center justify-center h-72 font-heading text-white uppercase tracking-widest hover:opacity-75 ">
+              <div className=" ">
+                <span className="relative z-10">
+                  {key} {value}
+                </span>
+                <img
+                  src={
+                    key === "villa"
+                      ? villa
+                      : key === "penthouse"
+                      ? penthouse
+                      : key === "bungalow"
+                      ? bungalow
+                      : key === "apartment"
+                      ? apartment
+                      : img2
+                  }
+                  alt=""
+                  className=" absolute inset-0 w-full h-full object-cover opacity-50 "
+                />
+              </div>
             </Link>
           ))}
         </div>

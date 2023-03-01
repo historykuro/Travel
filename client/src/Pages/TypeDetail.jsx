@@ -13,6 +13,7 @@ import Time from "react-time-format";
 import { getDatesInRange, isUnavailable } from "../utils/dateFunc";
 import { MdDeleteForever } from "react-icons/md";
 import { RxUpdate } from "react-icons/rx";
+import CommentSection from "./CommentSection";
 
 const customStyles = {
   content: {
@@ -62,7 +63,6 @@ const TypeDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  console.log(roomDetails);
 
   // Modal Update
 
@@ -87,7 +87,6 @@ const TypeDetail = () => {
       setData(roomDetails);
     }
   }, [roomDetails]);
-  console.log(id);
 
   const afterOpenModalUpdate = () => {};
 
@@ -140,6 +139,7 @@ const TypeDetail = () => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
+
     await axios.put(`http://localhost:3200/room/${id}`, data, { headers });
     // navigate(`/typeDetail/${room?._id}`);
   };
@@ -175,7 +175,7 @@ const TypeDetail = () => {
   return (
     <div
       ref={containerRef}
-      className="typeDetail h-full w-full mx-0 py-[5rem]  ">
+      className="typeDetail h-full w-full mx-0 py-[4rem]   ">
       <div className="wrapper  w-full my-0 mx-auto  gap-36 items-start relative">
         <div className="left flex-1  ">
           <div className="imgWrapper h-96 w-full overflow-hidden    ">
@@ -202,15 +202,6 @@ const TypeDetail = () => {
             </button>
           </div>
 
-          {/* <h2 className="mt-4 uppercase tracking-widest text-xs text-gray-900">
-            Update:
-            <Time
-              className="ml-1"
-              value={roomDetails.updatedAt}
-              format="DD/MM/YYYY"
-            />
-          </h2> */}
-
           <h2 className="mt-2 uppercase tracking-widest text-xs text-gray-900">
             <Time
               className="ml-1"
@@ -218,10 +209,10 @@ const TypeDetail = () => {
               format="DD/MM/YYYY"
             />
           </h2>
-          <h1 className="title text-2xl md:text-3xl text-gray-900 mt-4 ">
+          <h1 className="title font-display text-2xl md:text-3xl text-gray-900 mt-4 ">
             {roomDetails.title}
           </h1>
-          <div className="mt-6">
+          <div className="mt-6 prose lg:prose-xl">
             <p className="type   ">
               Type:
               <span className="ml-2 text-lg font-light leading-relaxed mt-0 mb-0 uppercase">
@@ -229,12 +220,11 @@ const TypeDetail = () => {
               </span>
             </p>
             <div className="review flex items-center  ">
-              Review:{" "}
-              <AiFillStar className="icon ml-2 text-bg-main text-[17px]" />
-              <span>{roomDetails.review}</span>
+              Review: <span className="ml-2">{roomDetails.review}</span>
+              <AiFillStar className="icon mr-2 text-bg-main text-[17px]" />
             </div>
             <p className="desc ">
-              <span className="ml-4 text-lg font-light leading-relaxed mt-6 mb-4">
+              <span className=" ml-4 text-lg font-light leading-relaxed mt-6 mb-4">
                 {roomDetails?.desc}
               </span>
             </p>
@@ -249,7 +239,6 @@ const TypeDetail = () => {
                 <span className="price ml-2 text-lg font-light leading-relaxed mt-0 mb-4">
                   {roomDetails?.price}$
                 </span>
-                / person
               </span>
             </div>
           </div>
@@ -313,7 +302,7 @@ const TypeDetail = () => {
           )}
         </div>
       </div>
-
+      <CommentSection id={id} />
       {/* Modal update */}
       <Modal
         isOpen={modalUpdateIsOpen}
@@ -384,16 +373,6 @@ const TypeDetail = () => {
                   value={data.photo}
                   onDone={({ base64 }) => setData({ ...data, photo: base64 })}
                 />
-
-                {/* {photo && (
-                  <p className="imageName absolute right-[35rem] flex items-center gap-[6px] text-[14px]">
-                    {data.photo}
-                    <AiOutlineCloseCircle
-                      className="icon cursor-pointer text-[16px] "
-                      onClick={() => handleCloseimg()}
-                    />
-                  </p>
-                )} */}
               </div>
               <div className="inputWrapper w-full flex center justify-end items-center mb-[0.5rem]">
                 <label className="mr-[15px] w-[33%]">Price: </label>

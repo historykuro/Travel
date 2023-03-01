@@ -1,19 +1,21 @@
 import Room from "../models/Room.js";
 import { verifyToken, verifyTokenAdmin } from "../middlewares/verifyToken.js";
 import express from "express";
+import { now } from "mongoose";
+import Comment from "../models/Comment.js";
 
 const roomController = express.Router();
 // get all
-roomController.get("/", verifyToken, async (req, res) => {
+roomController.get("/", async (req, res) => {
   const type = req.query.type;
 
   let rooms;
   try {
     if (type) {
-      rooms = await Room.find({ type: type }).limit(15);
+      rooms = await Room.find({ type: type }).limit(30);
       console.log(rooms);
     } else {
-      rooms = await Room.find({}).limit(15);
+      rooms = await Room.find({}).limit(30);
     }
     return res.status(200).json(rooms);
   } catch (error) {
@@ -21,8 +23,21 @@ roomController.get("/", verifyToken, async (req, res) => {
   }
 });
 
-roomController.get("/hello", (req, res) => {
-  return res.send({ a: "hello" });
+// get limit
+roomController.get("/limit", async (req, res) => {
+  const type = req.query.type;
+
+  let rooms;
+  try {
+    if (type) {
+      rooms = await Room.find({ type: type }).sort({ _id: -1 }).limit(5);
+    } else {
+      rooms = await Room.find({}).sort({ _id: -1 }).limit(5);
+    }
+    return res.status(200).json(rooms);
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 
 // get types and their corresponding numbers
@@ -38,6 +53,26 @@ roomController.get("/find/types", async (req, res) => {
     console.error(error.message);
   }
 });
+
+// pagination
+// roomController.get("/:page", async (req, res) => {
+//   let perPage = 4; // số lượng sản phẩm xuất hiện trên 1 page
+//   let page = req.params.page || 1;
+//   try {
+//     Room.find() // find tất cả các data
+//       .skip(perPage * page - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+//       .limit(perPage)
+//       .exec((err, room) => {
+//         Room.countDocuments((err, count) => {
+//           // đếm để tính có bao nhiêu trang
+//           if (err) return next(err);
+//           res.send(room); // Trả về dữ liệu các sản phẩm theo định dạng như JSON, XML,...
+//         });
+//       });
+//   } catch (error) {
+//     console.error(error.message);
+//   }
+// });
 
 // get
 roomController.get("/find/:id", async (req, res) => {
@@ -93,6 +128,101 @@ roomController.put("/bookRoom/:id", verifyToken, async (req, res) => {
     room.unavailableDates = room.unavailableDates.concat(unavailableDates);
     await room.save();
 
+    return res.status(200).json(room);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+// CommentPost
+
+// roomController.post("/:id/comment", verifyToken, async (req, res) => {
+//   const id = req.params.id;
+//   const { value } = req.body;
+
+//   if (value) {
+//     const post = await Room.findById(id);
+//     if (!post) return res.send({ message: "id is invalid" });
+//     post.comments.push(value);
+//     const updatedPost = await Room.findByIdAndUpdate(id, post, { new: true });
+
+//     return res.status(201).json(updatedPost);
+//   } else {
+//   }
+// });
+// Get all
+roomController.get("/connect", (req, res) => {
+  Comment.find()
+    .populate("user")
+    .sort({ createdAt: -1 })
+    .then((comments) => res.json(comments))
+    .catch((err) => res.status(400).json("Error" + err));
+});
+
+// Filter comment room
+roomController.get("/usercomment/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const commentRoom = await Comment.find({ room: id })
+      .populate("user")
+      .sort({ createdAt: -1 });
+    return res.status(200).send(commentRoom);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+roomController.get("/findcomment/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const rooms = await Room.findById(id);
+    return res.status(200).json(rooms);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+// create comment
+roomController.post("/:id/comment", verifyToken, async (req, res) => {
+  const id = req.params.id;
+  const comment = new Comment({
+    user: req.body.user,
+    text: req.body.text,
+    room: id,
+  });
+  try {
+    const savedComment = await comment.save();
+    const savedCommentWithUserData = await Comment.findById(savedComment._id);
+    res.send(savedCommentWithUserData);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
+// delete
+roomController.delete(
+  "/:id/deletecomment",
+  verifyTokenAdmin,
+  async (req, res) => {
+    try {
+      await Comment.findByIdAndDelete(req.params.id);
+      return res
+        .status(200)
+        .send({ msg: "Comment has been deleted successfully" });
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+);
+
+// Update comment
+roomController.put("/:id/updateComment", verifyToken, async (req, res) => {
+  try {
+    const room = await Room.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
     return res.status(200).json(room);
   } catch (error) {
     console.error(error.message);

@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import maldive from "../assets/img/maldive.jpg";
+import Places from "./Places";
 
 const Home = () => {
   const { token } = useSelector((state) => state.auth);
@@ -32,8 +33,10 @@ const Home = () => {
       ) : (
         <>
           <About />
+          <Places />
           <SuggestedPlaces />
-          <img src={maldive} alt="maldive" className="mt-[9rem]" />
+          {/* <img src={maldive} alt="maldive" className="mt-[9rem]" /> */}
+
           <Types />
         </>
       )}
