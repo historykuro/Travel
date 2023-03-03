@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authController from "./controllers/authController.js";
 import roomController from "./controllers/roomController.js";
 import uploadController from "./controllers/uploadController.js";
+import bodyParser from "body-parser";
 dotenv.config();
 
 const app = express();
@@ -24,8 +25,8 @@ mongoose
   .catch((err) => console.log(`${err} did not connect`));
 
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.get("/", function (req, res) {
   res.json({ message: "Connected to nodejs success" });

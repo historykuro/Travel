@@ -29,7 +29,6 @@ const Types = () => {
     };
     fetchTypes();
   }, []);
-
   return (
     <section className=" h-full w-full my-[10rem]   border-b ">
       <div className="wrapper h-full  mx-auto my-0 ">

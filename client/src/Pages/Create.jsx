@@ -14,6 +14,7 @@ const Create = () => {
   const [typeError, setTypeError] = useState(false);
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
+  console.log(img);
 
   const handleCreateRoom = async (e) => {
     e.preventDefault();
@@ -76,7 +77,7 @@ const Create = () => {
   };
 
   return (
-    <div className=" h-[calc(100vh-65px)] w-full flex items-center justify-center pt-[5rem] pb-[5rem] mt-[4.5rem] ">
+    <div className=" h-[calc(100vh-65px)] w-full flex items-center justify-center  mb-[10rem] pt-[10rem] ">
       <div className="wrapper flex flex-col  border border-solid border-[#444] rounded-[22px] p-[1.5rem] ">
         <h2 className="title text-center mb-[1.5rem] text-[26px] font-bold ">
           Create room
@@ -130,30 +131,14 @@ const Create = () => {
           </div>
           <div className="inputWrapperImg w-[400px] flex items-center mb-[0.5rem]">
             <label
-              htmlFor="img"
-              className="fileInputLabel flex items-center gap-[5rem]">
-              Image:{" "}
-              <span className=" hover:bg-[#fff] hover:text-[teal] hover:border-[teak]  inline-block px-[1rem] py-[0.5rem] bg-[teal] text-[#fff] border border-solid border-transparent cursor-pointer transition-all rounded-[16px] mx-[0.25rem] my-[0.1rem]">
-                Upload here
-              </span>
-            </label>
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              htmlFor="file_input"></label>
             <input
+              class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+              id="file_input"
               type="file"
-              filename="img"
-              id="img"
               onChange={onChangeFileFirst}
-              placeholder="image..."
-              className="hidden"
             />
-            {img && (
-              <p className="imageName absolute right-[35rem] flex items-center gap-[6px] text-[14px]">
-                {img.name}{" "}
-                <AiOutlineCloseCircle
-                  className="icon cursor-pointer text-[16px] "
-                  onClick={() => handleCloseimg()}
-                />
-              </p>
-            )}
           </div>
           <div className="inputWrapper w-full flex center justify-end items-center mb-[0.5rem]">
             <label className="mr-[15px] w-[33%]">Price: </label>

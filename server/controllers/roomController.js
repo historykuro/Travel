@@ -191,9 +191,11 @@ roomController.post("/:id/comment", verifyToken, async (req, res) => {
     room: id,
   });
   try {
-    const savedComment = await comment.save();
-    const savedCommentWithUserData = await Comment.findById(savedComment._id);
-    res.send(savedCommentWithUserData);
+    if (comment.text) {
+      const savedComment = await comment.save();
+      const savedCommentWithUserData = await Comment.findById(savedComment._id);
+      res.send(savedCommentWithUserData);
+    }
   } catch (err) {
     res.status(400).send(err);
   }

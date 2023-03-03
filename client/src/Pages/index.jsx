@@ -11,3 +11,4 @@ export { default as Update } from "./Update";
 export { default as Places } from "./Places";
 export { default as ListPlaces } from "./ListPlaces";
 export { default as CommentSection } from "./CommentSection";
+export { default as Profile } from "./Profile";

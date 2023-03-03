@@ -19,7 +19,8 @@ authController.post("/register", async (req, res) => {
     if (
       req.body.username === "" ||
       req.body.email === "" ||
-      req.body.password === ""
+      req.body.password === "" ||
+      req.body.img === ""
     ) {
       return res.status(500).json({ msg: "All fields must be populated" });
     }

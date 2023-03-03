@@ -12,6 +12,7 @@ import {
   TypeDetail,
   Update,
   ListPlaces,
+  Profile,
 } from "./Pages";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
 
           <Route path="/*" element={<Home />} />
           <Route path="/create" element={<Create />} />

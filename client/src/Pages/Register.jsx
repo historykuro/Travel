@@ -3,35 +3,101 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../redux/authSlice";
+import axios from "axios";
+import FileBase64 from "react-file-base64";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [img, setImg] = useState("");
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log(img);
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
+
+    let filename = null;
+
+    // try {
+    //   if (img) {
+    //     filename = Date.now() + img.name;
+    //     // for first img
+    //     formData.append("filename", filename);
+    //     formData.append("image", img);
+
+    //     await axios.post(`http://localhost:3200/upload/image`, {
+    //       body: formData,
+    //     });
+    //   }
+
+    //   // Register
+    //   const headers = {
+    //     "Content-Type": "multipart/form-data",
+    //   };
+
+    //   const data = await axios.post(
+    //     `http://localhost:3200/auth/register`,
+    //     {
+    //       username,
+    //       email,
+    //       password,
+    //       img: filename,
+    //     },
+    //     headers
+    //   );
+    //   dispatch(register(data.data));
+    //   navigate("/login");
+
+    //   // const res = await fetch(`http://localhost:3200/auth/register`, {
+    //   //   headers: {
+    //   //     "Content-Type": "application/json",
+    //   //   },
+    //   //   method: "POST",
+    //   //   body: JSON.stringify({ username, email, password, img: filename }),
+    //   // });
+    //   // const data = await res.json();
+    //   // console.log(data);
+    //   // dispatch(register(data));
+    //   // navigate("/login");
+    // } catch (error) {
+    //   setError((prev) => true);
+    //   setTimeout(() => {
+    //     setError((prev) => false);
+    //   }, 2500);
+    //   console.error(error);
+    // }
+
     try {
-      const res = await fetch(`http://localhost:3200/auth/register`, {
-        headers: {
-          "Content-Type": "application/json",
+      const headers = {
+        "Content-Type": "multipart/form-data",
+      };
+      const data = await axios.post(
+        `http://localhost:3200/auth/register`,
+        {
+          username,
+          email,
+          password,
+          img,
         },
-        method: "POST",
-        body: JSON.stringify({ username, email, password }),
-      });
-      const data = await res.json();
-      console.log(data);
-      dispatch(register(data));
+        headers
+      );
+      dispatch(register(data.data));
       navigate("/login");
     } catch (error) {
       setError((prev) => true);
       setTimeout(() => {
         setError((prev) => false);
       }, 2500);
+      console.error(error);
     }
+  };
+  const onChangeFileFirst = (e) => {
+    setImg(e.target.files[0]);
   };
   return (
     <div className="h-screen w-screen bg-bg-main absolute z-50">
@@ -40,10 +106,13 @@ const Register = () => {
           <h1 className="text-3xl font-semibold text-center text-[orange] underline">
             Register
           </h1>
-          <form className="mt-6" onSubmit={handleRegister}>
+          <form
+            className="mt-6"
+            onSubmit={handleRegister}
+            encType="multipart/form-data">
             <div className="mb-2">
               <label
-                for="Username"
+                htmlFor="Username"
                 className="block text-sm font-semibold text-gray-800">
                 Username
               </label>
@@ -58,7 +127,7 @@ const Register = () => {
             </div>
             <div className="mb-2">
               <label
-                for="email"
+                htmlFor="email"
                 className="block text-sm font-semibold text-gray-800">
                 Email
               </label>
@@ -73,7 +142,7 @@ const Register = () => {
             </div>
             <div className="mb-2">
               <label
-                for="password"
+                htmlFor="password"
                 className="block text-sm font-semibold text-gray-800">
                 Password
               </label>
@@ -82,6 +151,27 @@ const Register = () => {
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
                 className="block w-full px-4 py-2 mt-2 text-[orange] bg-white border rounded-md focus:border-bg-main focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              />
+            </div>
+            <div className="mb-2">
+              <label
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                htmlFor="file_input">
+                Avatar
+              </label>
+              {/* <input
+                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                id="file_input"
+                type="file"
+                onChange={onChangeFileFirst}
+              /> */}
+              <FileBase64
+                accept="image/*"
+                multiple={false}
+                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                type="file"
+                value={img}
+                onDone={({ base64 }) => setImg(base64)}
               />
             </div>
             {/* <div className="mb-2">
