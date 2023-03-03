@@ -15,12 +15,15 @@ const Types = () => {
   useEffect(() => {
     const fetchTypes = async () => {
       try {
-        const res = await fetch(`http://localhost:3200/room/find/types`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(
+          `https://travel-vh79.vercel.app/room/find/types`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         const types = await res.json();
         setTypes(types);
       } catch (error) {

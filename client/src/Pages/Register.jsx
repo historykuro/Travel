@@ -30,7 +30,7 @@ const Register = () => {
     //     formData.append("filename", filename);
     //     formData.append("image", img);
 
-    //     await axios.post(`http://localhost:3200/upload/image`, {
+    //     await axios.post(`https://travel-vh79.vercel.app/upload/image`, {
     //       body: formData,
     //     });
     //   }
@@ -41,7 +41,7 @@ const Register = () => {
     //   };
 
     //   const data = await axios.post(
-    //     `http://localhost:3200/auth/register`,
+    //     `https://travel-vh79.vercel.app/auth/register`,
     //     {
     //       username,
     //       email,
@@ -53,7 +53,7 @@ const Register = () => {
     //   dispatch(register(data.data));
     //   navigate("/login");
 
-    //   // const res = await fetch(`http://localhost:3200/auth/register`, {
+    //   // const res = await fetch(`https://travel-vh79.vercel.app/auth/register`, {
     //   //   headers: {
     //   //     "Content-Type": "application/json",
     //   //   },
@@ -77,7 +77,7 @@ const Register = () => {
         "Content-Type": "multipart/form-data",
       };
       const data = await axios.post(
-        `http://localhost:3200/auth/register`,
+        `https://travel-vh79.vercel.app/auth/register`,
         {
           username,
           email,

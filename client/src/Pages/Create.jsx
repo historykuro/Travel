@@ -36,7 +36,7 @@ const Create = () => {
         formData.append("filename", filename);
         formData.append("image", img);
 
-        await fetch(`http://localhost:3200/upload/image`, {
+        await fetch(`https://travel-vh79.vercel.app/upload/image`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -45,7 +45,7 @@ const Create = () => {
         });
 
         // upload product and navigate to product
-        const res = await fetch("http://localhost:3200/room", {
+        const res = await fetch("https://travel-vh79.vercel.app/room", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

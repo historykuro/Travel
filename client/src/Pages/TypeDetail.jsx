@@ -48,11 +48,14 @@ const TypeDetail = () => {
   const containerRef = useRef();
   useEffect(() => {
     const fetchRoom = async () => {
-      const res = await fetch(`http://localhost:3200/room/find/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `https://travel-vh79.vercel.app/room/find/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const room = await res.json();
       setRoomDetails(room);
@@ -110,7 +113,7 @@ const TypeDetail = () => {
     //     formData.append("filename", filename);
     //     formData.append("image", photo);
 
-    //     await fetch(`http://localhost:3200/upload/image`, {
+    //     await fetch(`https://travel-vh79.vercel.app/upload/image`, {
     //       headers: {
     //         Authorization: `Bearer ${token}`,
     //       },
@@ -119,7 +122,7 @@ const TypeDetail = () => {
     //     });
 
     //     // upload product and navigate to product
-    //     const res = await fetch(`http://localhost:3200/room/${id}`, {
+    //     const res = await fetch(`https://travel-vh79.vercel.app/room/${id}`, {
     //       headers: {
     //         Authorization: `Bearer ${token}`,
     //       },
@@ -135,7 +138,9 @@ const TypeDetail = () => {
       Authorization: `Bearer ${token}`,
     };
 
-    await axios.put(`http://localhost:3200/room/${id}`, data, { headers });
+    await axios.put(`https://travel-vh79.vercel.app/room/${id}`, data, {
+      headers,
+    });
     // navigate(`/typeDetail/${room?._id}`);
   };
 
@@ -154,7 +159,7 @@ const TypeDetail = () => {
 
   const handleDeleteProduct = async (e) => {
     try {
-      await fetch(`http://localhost:3200/room/${id}`, {
+      await fetch(`https://travel-vh79.vercel.app/room/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -175,7 +180,7 @@ const TypeDetail = () => {
         <div className="left flex-1  ">
           <div className="imgWrapper h-96 w-full overflow-hidden    ">
             <img
-              src={`http://localhost:3200/images/${roomDetails?.photo}`}
+              src={`https://travel-vh79.vercel.app/images/${roomDetails?.photo}`}
               alt="img"
               className="h-full w-full object-cover   "
             />

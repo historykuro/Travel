@@ -32,7 +32,7 @@ const CommentSection = () => {
     };
 
     await axios.post(
-      `http://localhost:3200/room/${id}/comment`,
+      `https://travel-vh79.vercel.app/room/${id}/comment`,
       {
         user: user,
         text: comment,
@@ -45,7 +45,9 @@ const CommentSection = () => {
     fetchRoom();
   };
   const fetchRoom = async () => {
-    const res = await axios.get(`http://localhost:3200/room/usercomment/${id}`);
+    const res = await axios.get(
+      `https://travel-vh79.vercel.app/room/usercomment/${id}`
+    );
 
     setComments(res.data);
   };
@@ -59,7 +61,7 @@ const CommentSection = () => {
   // useEffect(() => {
   //   const fetchRoom = async () => {
   //     const res = await axios.get(
-  //       `http://localhost:3200/room/usercomment/${id}`
+  //       `https://travel-vh79.vercel.app/room/usercomment/${id}`
   //     );
 
   //     setComments(res.data);
@@ -81,7 +83,7 @@ const CommentSection = () => {
   //     };
 
   //     await axios.delete(
-  //       `http://localhost:3200/room/${items?._id}/deletecomment`,
+  //       `https://travel-vh79.vercel.app/room/${items?._id}/deletecomment`,
   //       headers
   //     );
   //   } catch (error) {
@@ -152,7 +154,7 @@ const CommentSection = () => {
                     console.log(items._id);
                     try {
                       await axios.delete(
-                        `http://localhost:3200/room/${items?._id}/deletecomment`,
+                        `https://travel-vh79.vercel.app/room/${items?._id}/deletecomment`,
                         {
                           headers: {
                             "Content-Type": "application/json",
@@ -161,7 +163,7 @@ const CommentSection = () => {
                         }
                       );
                       fetchRoom();
-                      //   `http://localhost:3200/room/${items?._id}/deletecomment`,
+                      //   `https://travel-vh79.vercel.app/room/${items?._id}/deletecomment`,
                       //   {
                       //     headers: {
                       //       "Content-Type": "application/json",

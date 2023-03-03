@@ -25,7 +25,7 @@ const ListPlaces = () => {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const res = await axios.get(`http://localhost:3200/room`, {
+      const res = await axios.get(`https://travel-vh79.vercel.app/room`, {
         headers,
       });
       setItems(res.data.reverse());
@@ -144,7 +144,7 @@ const ListPlaces = () => {
               <div key={index}>
                 <Link to={`/typeDetail/${item._id}`}>
                   <img
-                    src={`http://localhost:3200/images/${item.photo}`}
+                    src={`https://travel-vh79.vercel.app/images/${item.photo}`}
                     alt={item.photo}
                     className="w-full h-52 md:h-64 lg:h-96 xl:h-64 object-cover"
                   />

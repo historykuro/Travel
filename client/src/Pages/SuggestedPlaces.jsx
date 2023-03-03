@@ -23,9 +23,12 @@ const SuggestedPlaces = () => {
         const headers = {
           Authorization: `Bearer ${token}`,
         };
-        const res = await axios.get(`http://localhost:3200/room/limit`, {
-          headers,
-        });
+        const res = await axios.get(
+          `https://travel-vh79.vercel.app/room/limit`,
+          {
+            headers,
+          }
+        );
 
         setEstates(res.data);
       } catch (error) {
@@ -95,7 +98,7 @@ const SuggestedPlaces = () => {
                 className="place h-[450px] w-full bg-[#fff] rounded-xl mb-[7.5rem] relative transition-all shadow-y  ">
                 <div className="imgWrapper h-[300px] w-full overflow-hidden rounded-t-xl opacity-80 hover:opacity-100 duration-200 space-y-2 text-left ">
                   <img
-                    src={`http://localhost:3200/images/${suggestedPlace?.photo}`}
+                    src={`https://travel-vh79.vercel.app/images/${suggestedPlace?.photo}`}
                     alt={suggestedPlace.photo}
                     className="w-full h-full object-cover rounded-t-lg hover:scale-[1.035]  bg-[black] transition-all  "
                   />
