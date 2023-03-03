@@ -30,7 +30,7 @@ const Types = () => {
     fetchTypes();
   }, []);
   return (
-    <section className=" h-full w-full my-[10rem]   border-b ">
+    <section className=" h-full w-full mt-[8rem]   border-b ">
       <div className="wrapper h-full  mx-auto my-0 ">
         <div className="titles flex flex-col items-center justify-center gap-3 mb-[4rem]">
           <h5 className="subtitle text-[#333] text-[22px] font-[500] ">
@@ -98,6 +98,13 @@ const Types = () => {
             </Link>
           ))}
         </div>
+        <Link
+          to="/list"
+          className="flex justify-center my-10 lg:w-1/4 md:w-full mx-auto ">
+          <button className="bg-bg-main w-full py-2 px-16 text-white rounded-md hover:bg-inherit hover:text-bg-main hover:border-bg-main border border-transparent hover:duration-300">
+            View All
+          </button>
+        </Link>
       </div>
     </section>
   );

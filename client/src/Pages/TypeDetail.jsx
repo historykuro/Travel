@@ -58,7 +58,7 @@ const TypeDetail = () => {
       setRoomDetails(room);
     };
     fetchRoom();
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -76,11 +76,6 @@ const TypeDetail = () => {
     review: "null",
   });
   console.log(data);
-  // const room = useSelector((state) =>
-  //   roomDetails._id
-  //     ? state.roomDetails.find((message) => message._id === roomDetails._id)
-  //     : null
-  // );
 
   useEffect(() => {
     if (roomDetails) {
@@ -159,7 +154,7 @@ const TypeDetail = () => {
 
   const handleDeleteProduct = async (e) => {
     try {
-      const res = await fetch(`http://localhost:3200/room/${id}`, {
+      await fetch(`http://localhost:3200/room/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

@@ -22,9 +22,9 @@ const Places = () => {
   console.log(img[0]?.photo);
 
   return (
-    <section className="places" id="places">
-      <div className="w-4/5 m-auto cursor-default">
-        <div className="w-full xl:w-1/2 m-auto text-center my-10 mt-[10rem] space-y-5">
+    <section className="places  " id="places">
+      <div className="w-4/5 hidden lg:block  m-auto cursor-default">
+        <div className="w-full xl:w-1/2  m-auto text-center my-10 mt-[10rem] space-y-5">
           <h1 className="text-4xl font-bold text-bg-main">
             Places not to be missed
           </h1>
@@ -34,7 +34,7 @@ const Places = () => {
             totam.
           </p>
         </div>
-        <div className="inline md:grid grid-rows-3 lg:grid-rows-2 grid-flow-col gap-4 w-full lg:h-[450px] pb-10 border-b space-y-6 md:space-y-0">
+        <div className="hidden md:grid grid-rows-3 lg:grid-rows-2 grid-flow-col gap-4 w-full lg:h-[450px] pb-10 border-b space-y-6 md:space-y-0">
           <Link
             to={`/typeDetail/${img[0]?._id}`}
             className="row-span-1 col-span-2">

@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import Time from "react-time-format";
 import "flowbite";
+import { useDebounce } from "use-debounce";
+
 import Modal from "react-modal";
 
 import { CiCircleRemove } from "react-icons/ci";
@@ -13,12 +15,14 @@ const CommentSection = () => {
   const { token } = useSelector((state) => state.auth);
   const [isOpen, setOpen] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [comments, setComments] = useState([]);
 
   const [comment, setComment] = useState("");
   const { user } = useSelector((state) => state.auth);
 
   const id = useParams().id;
 
+  const debounceComment = useDebounce(comments, 500);
   const commentRef = useRef();
   const handleComment = async () => {
     const headers = {
@@ -38,20 +42,18 @@ const CommentSection = () => {
       }
     );
     setComment("");
+    fetchRoom();
+  };
+  const fetchRoom = async () => {
+    const res = await axios.get(`http://localhost:3200/room/usercomment/${id}`);
+
+    setComments(res.data);
   };
 
-  const [comments, setComments] = useState([]);
   useEffect(() => {
-    const fetchRoom = async () => {
-      const res = await axios.get(
-        `http://localhost:3200/room/usercomment/${id}`
-      );
-
-      setComments(res.data);
-    };
-
     fetchRoom();
-  }, [comment]);
+  }, []);
+
   console.log(comments);
 
   // useEffect(() => {
@@ -158,7 +160,7 @@ const CommentSection = () => {
                           },
                         }
                       );
-                      // await fetch(
+                      fetchRoom();
                       //   `http://localhost:3200/room/${items?._id}/deletecomment`,
                       //   {
                       //     headers: {

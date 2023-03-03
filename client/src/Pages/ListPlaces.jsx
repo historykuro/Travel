@@ -50,7 +50,7 @@ const ListPlaces = () => {
 
   //   Style ReactPaginate
   const containerStyle =
-    "sm:flex hidden  w-full  flex items-center  border-t border-gray-200 relative";
+    "sm:flex   w-full  flex items-center  border-t border-gray-200 relative";
 
   const pagination_page =
     "  text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2";
