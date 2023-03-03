@@ -96,9 +96,7 @@ const Register = () => {
       console.error(error);
     }
   };
-  const onChangeFileFirst = (e) => {
-    setImg(e.target.files[0]);
-  };
+
   return (
     <div className="h-screen w-screen bg-bg-main absolute z-50">
       <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">

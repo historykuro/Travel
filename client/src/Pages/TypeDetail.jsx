@@ -97,43 +97,6 @@ const TypeDetail = () => {
   };
 
   const handleUpdateProduct = async (e) => {
-    // const acceptableTypes = ["apartment", "penthouse", "bungalow", "villa"];
-
-    // if (!acceptableTypes.includes(type)) {
-    //   setTypeError(true);
-    //   setTimeout(() => {
-    //     setTypeError(false);
-    //   }, 10 * 1000);
-    // }
-    // try {
-    //   let filename = null;
-    //   if (photo) {
-    //     filename = Date.now() + photo.name;
-    //     // for first photo
-    //     formData.append("filename", filename);
-    //     formData.append("image", photo);
-
-    //     await fetch(`https://travel-vh79.vercel.app/upload/image`, {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //       method: "POST",
-    //       body: formData,
-    //     });
-
-    //     // upload product and navigate to product
-    //     const res = await fetch(`https://travel-vh79.vercel.app/room/${id}`, {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //       method: "PUT",
-    //       body: data,
-    //     });
-    //     navigate(`/typeDetail/${room?._id}`);
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -180,7 +143,7 @@ const TypeDetail = () => {
         <div className="left flex-1  ">
           <div className="imgWrapper h-96 w-full overflow-hidden    ">
             <img
-              src={`https://travel-vh79.vercel.app/images/${roomDetails?.photo}`}
+              src={`${roomDetails?.photo}`}
               alt="img"
               className="h-full w-full object-cover   "
             />

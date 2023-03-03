@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import FileBase64 from "react-file-base64";
 
 const Create = () => {
   const [title, setTitle] = useState("");
@@ -27,53 +28,28 @@ const Create = () => {
       }, 10 * 1000);
     }
     try {
-      const formData = new FormData();
-
-      let filename = null;
-      if (img) {
-        filename = Date.now() + img.name;
-        // for first img
-        formData.append("filename", filename);
-        formData.append("image", img);
-
-        await fetch(`https://travel-vh79.vercel.app/upload/image`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          method: "POST",
-          body: formData,
-        });
-
-        // upload product and navigate to product
-        const res = await fetch("https://travel-vh79.vercel.app/room", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          method: "POST",
-          body: JSON.stringify({
-            title,
-            desc,
-            country,
-            type,
-            photo: filename,
-            price,
-            review,
-          }),
-        });
-        const room = await res.json();
-        navigate(`/typeDetail/${room?._id}`);
-      }
+      // upload product and navigate to product
+      const res = await fetch("https://travel-vh79.vercel.app/room", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          desc,
+          country,
+          type,
+          photo: img,
+          price,
+          review,
+        }),
+      });
+      const room = await res.json();
+      navigate(`/typeDetail/${room?._id}`);
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const handleCloseimg = () => {
-    setImg((prev) => null);
-  };
-  const onChangeFileFirst = (e) => {
-    setImg(e.target.files[0]);
   };
 
   return (
@@ -133,11 +109,13 @@ const Create = () => {
             <label
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               htmlFor="file_input"></label>
-            <input
-              class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-              id="file_input"
+            <FileBase64
+              accept="image/*"
+              multiple={false}
+              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
               type="file"
-              onChange={onChangeFileFirst}
+              value={img}
+              onDone={({ base64 }) => setImg(base64)}
             />
           </div>
           <div className="inputWrapper w-full flex center justify-end items-center mb-[0.5rem]">

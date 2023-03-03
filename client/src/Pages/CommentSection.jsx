@@ -56,8 +56,6 @@ const CommentSection = () => {
     fetchRoom();
   }, []);
 
-  console.log(comments);
-
   // useEffect(() => {
   //   const fetchRoom = async () => {
   //     const res = await axios.get(
