@@ -12,14 +12,14 @@ const Places = () => {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const res = await axios.get(`https://travel-vh79.vercel.app/room`, {
+      const res = await axios.get(`http://localhost:3200/room`, {
         headers,
       });
       setImg(res.data.reverse());
     };
     fetchImg();
   }, []);
-  console.log(img[0]?.photo);
+  console.log(img);
 
   return (
     <section className="places  " id="places">
@@ -40,7 +40,7 @@ const Places = () => {
             className="row-span-1 col-span-2">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`https://travel-vh79.vercel.app/images/${img[0]?.photo}`}
+              src={`${img[0]?.photo}`}
               alt=""
             />
           </Link>
@@ -49,7 +49,7 @@ const Places = () => {
             className="lg:row-span-1 lg:col-span-1 md:col-span-2">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`https://travel-vh79.vercel.app/images/${img[1]?.photo}`}
+              src={`${img[1]?.photo}`}
               alt=""
             />
           </Link>
@@ -58,7 +58,7 @@ const Places = () => {
             className="lg:row-span-1 lg:col-span-1 md:col-span-2">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`https://travel-vh79.vercel.app/images/${img[2]?.photo}`}
+              src={`${img[2]?.photo}`}
               alt=""
             />
           </Link>
@@ -67,7 +67,7 @@ const Places = () => {
             className="lg:row-span-2 lg:col-span-1 md:col-span-2 md:row-span-1">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`https://travel-vh79.vercel.app/images/${img[3]?.photo}`}
+              src={`${img[3]?.photo}`}
               alt=""
             />
           </Link>
@@ -76,7 +76,7 @@ const Places = () => {
             className="lg:row-span-1 lg:col-span-1 md:col-span-2">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`https://travel-vh79.vercel.app/images/${img[4]?.photo}`}
+              src={`${img[4]?.photo}`}
               alt=""
             />
           </Link>
@@ -85,7 +85,7 @@ const Places = () => {
             className="lg:row-span-1 lg:col-span-1 md:col-span-2">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`https://travel-vh79.vercel.app/images/${img[5]?.photo}`}
+              src={`${img[5]?.photo}`}
               alt=""
             />
           </Link>

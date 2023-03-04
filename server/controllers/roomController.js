@@ -1,7 +1,6 @@
 import Room from "../models/Room.js";
 import { verifyToken, verifyTokenAdmin } from "../middlewares/verifyToken.js";
 import express from "express";
-import { now } from "mongoose";
 import Comment from "../models/Comment.js";
 
 const roomController = express.Router();

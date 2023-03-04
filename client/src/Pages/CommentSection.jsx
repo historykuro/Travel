@@ -32,7 +32,7 @@ const CommentSection = () => {
     };
 
     await axios.post(
-      `https://travel-vh79.vercel.app/room/${id}/comment`,
+      `http://localhost:3200/room/${id}/comment`,
       {
         user: user,
         text: comment,
@@ -45,9 +45,7 @@ const CommentSection = () => {
     fetchRoom();
   };
   const fetchRoom = async () => {
-    const res = await axios.get(
-      `https://travel-vh79.vercel.app/room/usercomment/${id}`
-    );
+    const res = await axios.get(`http://localhost:3200/room/usercomment/${id}`);
 
     setComments(res.data);
   };
@@ -55,39 +53,6 @@ const CommentSection = () => {
   useEffect(() => {
     fetchRoom();
   }, []);
-
-  // useEffect(() => {
-  //   const fetchRoom = async () => {
-  //     const res = await axios.get(
-  //       `https://travel-vh79.vercel.app/room/usercomment/${id}`
-  //     );
-
-  //     setComments(res.data);
-  //   };
-
-  //   fetchRoom();
-  // }, []);
-  // console.log(commentRef);
-
-  // Handle Comment
-  // console.log(comments);
-
-  // const handleDeleteProduct = async (e) => {
-  //   try {
-  //     const headers = {
-  //       Accept: "application/json",
-  //       "Content-type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     };
-
-  //     await axios.delete(
-  //       `https://travel-vh79.vercel.app/room/${items?._id}/deletecomment`,
-  //       headers
-  //     );
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   const index = comments.map((items, index) => {
     return index;
@@ -152,7 +117,7 @@ const CommentSection = () => {
                     console.log(items._id);
                     try {
                       await axios.delete(
-                        `https://travel-vh79.vercel.app/room/${items?._id}/deletecomment`,
+                        `http://localhost:3200/room/${items?._id}/deletecomment`,
                         {
                           headers: {
                             "Content-Type": "application/json",
@@ -161,7 +126,7 @@ const CommentSection = () => {
                         }
                       );
                       fetchRoom();
-                      //   `https://travel-vh79.vercel.app/room/${items?._id}/deletecomment`,
+                      //   `http://localhost:3200/room/${items?._id}/deletecomment`,
                       //   {
                       //     headers: {
                       //       "Content-Type": "application/json",

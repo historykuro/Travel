@@ -3,6 +3,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FileBase64 from "react-file-base64";
+import axios from "axios";
 
 const Create = () => {
   const [title, setTitle] = useState("");
@@ -15,8 +16,6 @@ const Create = () => {
   const [typeError, setTypeError] = useState(false);
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
-  console.log(img);
-
   const handleCreateRoom = async (e) => {
     e.preventDefault();
     const acceptableTypes = ["apartment", "penthouse", "bungalow", "villa"];
@@ -29,13 +28,26 @@ const Create = () => {
     }
     try {
       // upload product and navigate to product
-      const res = await fetch("https://travel-vh79.vercel.app/room", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        method: "POST",
-        body: JSON.stringify({
+      // const res = await fetch("http://localhost:3200/room", {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //     title,
+      //     desc,
+      //     country,
+      //     type,
+      //     photo: img,
+      //     price,
+      //     review,
+      //   }),
+      // });
+      // const room = await res.json();
+      const room = await axios.post(
+        `http://localhost:3200/room`,
+        {
           title,
           desc,
           country,
@@ -43,10 +55,16 @@ const Create = () => {
           photo: img,
           price,
           review,
-        }),
-      });
-      const room = await res.json();
-      navigate(`/typeDetail/${room?._id}`);
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      navigate(`/typeDetail/${room?.data?._id}`);
     } catch (error) {
       console.error(error);
     }

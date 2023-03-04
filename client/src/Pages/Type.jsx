@@ -20,12 +20,9 @@ const Type = () => {
         const headers = {
           Authorization: `Bearer ${token}`,
         };
-        const res = await axios.get(
-          `https://travel-vh79.vercel.app/room?type=${type}`,
-          {
-            headers,
-          }
-        );
+        const res = await axios.get(`http://localhost:3200/room?type=${type}`, {
+          headers,
+        });
 
         setEstates(res.data.reverse());
       } catch (error) {
@@ -36,7 +33,6 @@ const Type = () => {
   }, []);
 
   // ReactPaginate
-  console.log(estates);
 
   const endOffset = itemOffset + 4;
   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
@@ -149,7 +145,7 @@ const Type = () => {
                 className="place h-[450px] w-full bg-[#fff] rounded-xl mb-[7.5rem] relative transition-all shadow-y  ">
                 <div className="imgWrapper h-[300px] w-full overflow-hidden rounded-t-xl opacity-80 hover:opacity-100 duration-200 space-y-2 text-left ">
                   <img
-                    src={`https://travel-vh79.vercel.app/images/${estate?.photo}`}
+                    src={`${estate?.photo}`}
                     alt={estate.photo}
                     className="w-full h-full object-cover rounded-t-lg hover:scale-[1.035]  bg-[black] transition-all  "
                   />

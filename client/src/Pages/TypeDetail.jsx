@@ -48,14 +48,11 @@ const TypeDetail = () => {
   const containerRef = useRef();
   useEffect(() => {
     const fetchRoom = async () => {
-      const res = await fetch(
-        `https://travel-vh79.vercel.app/room/find/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await fetch(`http://localhost:3200/room/find/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const room = await res.json();
       setRoomDetails(room);
@@ -101,7 +98,7 @@ const TypeDetail = () => {
       Authorization: `Bearer ${token}`,
     };
 
-    await axios.put(`https://travel-vh79.vercel.app/room/${id}`, data, {
+    await axios.put(`http://localhost:3200/room/${id}`, data, {
       headers,
     });
     // navigate(`/typeDetail/${room?._id}`);
@@ -122,7 +119,7 @@ const TypeDetail = () => {
 
   const handleDeleteProduct = async (e) => {
     try {
-      await fetch(`https://travel-vh79.vercel.app/room/${id}`, {
+      await fetch(`http://localhost:3200/room/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -205,44 +202,7 @@ const TypeDetail = () => {
               </span>
             </div>
           </div>
-          {/* <form
-            className="typeDetailForm mt-[2rem] flex flex-col  gap-[22px]"
-            onSubmit={handleSubmit}>
-            <h3 className="text-[#222] text-[24px] mb-[1rem]">
-              Enter information here
-            </h3>
-            <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              type="text"
-              placeholder="Full name"
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              type="email"
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <div className="dateContainer flex gap-[6px]">
-              <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                type="date"
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-              <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                type="date"
-                onChange={(e) => setEndDate(e.target.value)}
-              />
-            </div>
-            <button
-              type="submit"
-              className="hover:border hover:border-solid hover:border-bg-main hover:text-bg-main hover:bg-[#fff] mt-[2rem] py-[0.5rem] px-[1.25rem] text-[#fff] text-[22px] font-[500] border border-solid border-transparent bg-bg-main rounded-2xl cursor-pointer">
-              Book now
-            </button>
-          </form> */}
+
           {error && (
             <div
               className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded fixed top-20 right-5"
@@ -331,7 +291,8 @@ const TypeDetail = () => {
               <div className="inputWrapperImg w-[400px] flex items-center mb-[0.5rem]">
                 <FileBase64
                   accept="image/*"
-                  multiple={true}
+                  multiple={false}
+                  className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                   type="file"
                   value={data.photo}
                   onDone={({ base64 }) => setData({ ...data, photo: base64 })}

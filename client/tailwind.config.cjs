@@ -4,6 +4,7 @@ module.exports = {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/tw-elements/dist/js/**/*.{js,jsx,ts,tsx}",
   ],
   darkMode: "class",
 
@@ -78,5 +79,6 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
     require("flowbite/plugin"),
+    require("tw-elements/dist/plugin"),
   ],
 };
