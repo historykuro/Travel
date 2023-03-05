@@ -34,7 +34,7 @@ const Create = () => {
 
       // upload product and navigate to product
 
-      const res = await fetch("https://travel-mu-liard.vercel.app/room", {
+      const res = await fetch("http://localhost:3200/room", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

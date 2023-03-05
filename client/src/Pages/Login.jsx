@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`https://travel-mu-liard.vercel.app/auth/login`, {
+      const res = await fetch(`http://localhost:3200/auth/login`, {
         headers: {
           "Content-Type": "application/json",
         },

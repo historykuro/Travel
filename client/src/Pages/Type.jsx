@@ -23,7 +23,7 @@ const Type = () => {
           Authorization: `Bearer ${token}`,
         };
         const res = await axios.get(
-          `https://travel-mu-liard.vercel.app//room?type=${type}`,
+          `http://localhost:3200//room?type=${type}`,
           {
             headers,
           }

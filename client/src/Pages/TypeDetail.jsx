@@ -50,14 +50,11 @@ const TypeDetail = () => {
   const containerRef = useRef();
   useEffect(() => {
     const fetchRoom = async () => {
-      const res = await fetch(
-        `https://travel-mu-liard.vercel.app/room/find/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await fetch(`http://localhost:3200/room/find/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const room = await res.json();
       setRoomDetails(room);
@@ -104,7 +101,7 @@ const TypeDetail = () => {
     };
 
     try {
-      await axios.put(`https://travel-mu-liard.vercel.app/room/${id}`, data, {
+      await axios.put(`http://localhost:3200/room/${id}`, data, {
         headers,
       });
       // navigate(`/typeDetail/${room?.data?._id}`);
@@ -128,7 +125,7 @@ const TypeDetail = () => {
 
   const handleDeleteProduct = async (e) => {
     try {
-      await fetch(`https://travel-mu-liard.vercel.app/room/${id}`, {
+      await fetch(`http://localhost:3200/room/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

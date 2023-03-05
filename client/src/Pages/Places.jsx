@@ -12,7 +12,7 @@ const Places = () => {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const res = await axios.get(`https://travel-mu-liard.vercel.app/room`, {
+      const res = await axios.get(`http://localhost:3200/room`, {
         headers,
       });
       setImg(res.data.reverse());
