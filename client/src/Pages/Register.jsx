@@ -28,7 +28,7 @@ const Register = () => {
         "Content-Type": "multipart/form-data",
       };
       const data = await axios.post(
-        `http://localhost:3200/auth/register`,
+        `https://travel-mu-liard.vercel.app/auth/register`,
         {
           username,
           email,

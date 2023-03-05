@@ -23,9 +23,12 @@ const SuggestedPlaces = () => {
         const headers = {
           Authorization: `Bearer ${token}`,
         };
-        const res = await axios.get(`http://localhost:3200/room/limit`, {
-          headers,
-        });
+        const res = await axios.get(
+          `https://travel-mu-liard.vercel.app/room/limit`,
+          {
+            headers,
+          }
+        );
 
         setEstates(res.data);
       } catch (error) {
