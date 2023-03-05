@@ -51,7 +51,7 @@ const TypeDetail = () => {
   useEffect(() => {
     const fetchRoom = async () => {
       const res = await fetch(
-        `https://travel-mu-liard.vercel.app/room/find/${id}`,
+        `https://travel-mu-liard.vercel.app//room/find/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

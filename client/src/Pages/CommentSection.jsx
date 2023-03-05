@@ -119,7 +119,7 @@ const CommentSection = () => {
                     console.log(items._id);
                     try {
                       await axios.delete(
-                        `https://travel-mu-liard.vercel.app/room/${items?._id}/deletecomment`,
+                        `https://travel-mu-liard.vercel.app//room/${items?._id}/deletecomment`,
                         {
                           headers: {
                             "Content-Type": "application/json",
@@ -128,7 +128,7 @@ const CommentSection = () => {
                         }
                       );
                       fetchRoom();
-                      //   `https://travel-mu-liard.vercel.app/room/${items?._id}/deletecomment`,
+                      //   `https://travel-mu-liard.vercel.app//room/${items?._id}/deletecomment`,
                       //   {
                       //     headers: {
                       //       "Content-Type": "application/json",
