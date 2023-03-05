@@ -11,7 +11,6 @@ import {
   Register,
   Type,
   TypeDetail,
-  Update,
   ListPlaces,
   Profile,
 } from "./Pages";
@@ -20,7 +19,6 @@ function App() {
   return (
     <div className="bg-gray-100">
       <>
-        <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -28,13 +26,11 @@ function App() {
 
           <Route path="/*" element={<Home />} />
           <Route path="/create" element={<Create />} />
-          <Route path="/update" element={<Update />} />
 
           <Route path="/types/:type" element={<Type />} />
           <Route path="/typeDetail/:id" element={<TypeDetail />} />
           <Route path="/list" element={<ListPlaces />} />
         </Routes>
-        <Footer />
       </>
     </div>
   );

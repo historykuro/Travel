@@ -37,7 +37,7 @@ const Register = () => {
         },
         headers
       );
-      // dispatch(register(data.data));
+      dispatch(register(data.data));
       navigate("/login");
     } catch (error) {
       setError((prev) => true);

@@ -2,6 +2,7 @@ import Room from "../models/Room.js";
 import { verifyToken, verifyTokenAdmin } from "../middlewares/verifyToken.js";
 import express from "express";
 import Comment from "../models/Comment.js";
+import cloudinary from "../ultis/cloudinary.js";
 
 const roomController = express.Router();
 // get all
@@ -85,31 +86,61 @@ roomController.get("/find/:id", async (req, res) => {
 });
 
 // create
-roomController.post("/", verifyTokenAdmin, async (req, res) => {
+roomController.post("/", verifyToken, async (req, res) => {
+  const { title, desc, price, country, photo, type, review } = req.body;
   try {
-    const createdRoom = await Room.create(req.body);
-    return res.status(201).json(createdRoom);
+    const result = await cloudinary.uploader.upload(photo, {
+      folder: "products",
+    });
+    const createdRoom = await Room.create({
+      title,
+      desc,
+      price,
+      country,
+      photo: {
+        public_id: result.public_id,
+        url: result.secure_url,
+      },
+      type,
+      review,
+    });
+
+    return res.status(201).send({ message: createdRoom });
   } catch (error) {
-    console.error(error.message);
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong" });
   }
 });
 
 // update
-roomController.put("/:id", verifyTokenAdmin, async (req, res) => {
+roomController.put("/:id", async (req, res) => {
+  const { photo, ...items } = req.body;
   try {
+    const result = await cloudinary.uploader.upload(photo, {
+      folder: "products",
+    });
     const room = await Room.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body },
+      {
+        $set: {
+          photo: {
+            public_id: result.public_id,
+            url: result.secure_url,
+          },
+          ...items,
+        },
+      },
       { new: true }
     );
-    return res.status(200).json(room);
+    return res.status(200).send(room);
   } catch (error) {
-    console.error(error.message);
+    console.error("error Sever", error);
+    res.status(500).json({ error: "Something went wrong" });
   }
 });
 
 // delete
-roomController.delete("/:id", verifyTokenAdmin, async (req, res) => {
+roomController.delete("/:id", verifyToken, async (req, res) => {
   try {
     await Room.findByIdAndDelete(req.params.id);
     return res.status(200).json({ msg: "Room has been deleted successfully" });
@@ -119,19 +150,19 @@ roomController.delete("/:id", verifyTokenAdmin, async (req, res) => {
 });
 
 // book hotel
-roomController.put("/bookRoom/:id", verifyToken, async (req, res) => {
-  try {
-    const { unavailableDates } = req.body;
-    const room = await Room.findByIdAndUpdate(req.params.id);
+// roomController.put("/bookRoom/:id", verifyToken, async (req, res) => {
+//   try {
+//     const { unavailableDates } = req.body;
+//     const room = await Room.findByIdAndUpdate(req.params.id);
 
-    room.unavailableDates = room.unavailableDates.concat(unavailableDates);
-    await room.save();
+//     room.unavailableDates = room.unavailableDates.concat(unavailableDates);
+//     await room.save();
 
-    return res.status(200).json(room);
-  } catch (error) {
-    console.error(error.message);
-  }
-});
+//     return res.status(200).json(room);
+//   } catch (error) {
+//     console.error(error.message);
+//   }
+// });
 
 // CommentPost
 
@@ -201,20 +232,16 @@ roomController.post("/:id/comment", verifyToken, async (req, res) => {
 });
 
 // delete
-roomController.delete(
-  "/:id/deletecomment",
-  verifyTokenAdmin,
-  async (req, res) => {
-    try {
-      await Comment.findByIdAndDelete(req.params.id);
-      return res
-        .status(200)
-        .send({ msg: "Comment has been deleted successfully" });
-    } catch (error) {
-      console.error(error.message);
-    }
+roomController.delete("/:id/deletecomment", verifyToken, async (req, res) => {
+  try {
+    await Comment.findByIdAndDelete(req.params.id);
+    return res
+      .status(200)
+      .send({ msg: "Comment has been deleted successfully" });
+  } catch (error) {
+    console.error(error.message);
   }
-);
+});
 
 // Update comment
 roomController.put("/:id/updateComment", verifyToken, async (req, res) => {

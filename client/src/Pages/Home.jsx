@@ -32,12 +32,14 @@ const Home = () => {
         </div>
       ) : (
         <>
+          <Navbar />
           <About />
           <Places />
           <SuggestedPlaces />
           {/* <img src={maldive} alt="maldive" className="mt-[9rem]" /> */}
 
           <Types />
+          <Footer />
         </>
       )}
     </div>

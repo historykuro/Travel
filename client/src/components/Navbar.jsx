@@ -48,7 +48,7 @@ const Navbar = () => {
               <button
                 type="button"
                 // onClick={onOpen}
-                className="group  flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                className="group  relative   before:border-black flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 after:border-b-[30px] after:border-transparent  "
                 id="user-menu-button"
                 aria-expanded="false"
                 // data-dropdown-toggle="user-dropdown"
@@ -64,7 +64,7 @@ const Navbar = () => {
                   alt="user photo"
                 />
                 <div
-                  className="z-50 absolute hidden group-focus:block   right-4 top-12  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                  className="z-50 absolute hidden   group-focus-within:block   right-1 top-8  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
                   id="user-dropdown">
                   <div className=" px-4 py-3">
                     <span className="block text-sm text-gray-900 dark:text-white">

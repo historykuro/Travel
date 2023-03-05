@@ -40,7 +40,7 @@ const Places = () => {
             className="row-span-1 col-span-2">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`${img[0]?.photo}`}
+              src={`${img[0]?.photo?.url}`}
               alt=""
             />
           </Link>
@@ -49,7 +49,7 @@ const Places = () => {
             className="lg:row-span-1 lg:col-span-1 md:col-span-2">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`${img[1]?.photo}`}
+              src={`${img[1]?.photo?.url}`}
               alt=""
             />
           </Link>
@@ -58,7 +58,7 @@ const Places = () => {
             className="lg:row-span-1 lg:col-span-1 md:col-span-2">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`${img[2]?.photo}`}
+              src={`${img[2]?.photo?.url}`}
               alt=""
             />
           </Link>
@@ -67,7 +67,7 @@ const Places = () => {
             className="lg:row-span-2 lg:col-span-1 md:col-span-2 md:row-span-1">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`${img[3]?.photo}`}
+              src={`${img[3]?.photo?.url}`}
               alt=""
             />
           </Link>
@@ -76,7 +76,7 @@ const Places = () => {
             className="lg:row-span-1 lg:col-span-1 md:col-span-2">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`${img[4]?.photo}`}
+              src={`${img[4]?.photo?.url}`}
               alt=""
             />
           </Link>
@@ -85,7 +85,7 @@ const Places = () => {
             className="lg:row-span-1 lg:col-span-1 md:col-span-2">
             <img
               className="w-full h-full object-cover rounded-md cursor-pointer opacity-80 hover:opacity-100 duration-200"
-              src={`${img[5]?.photo}`}
+              src={`${img[5]?.photo?.url}`}
               alt=""
             />
           </Link>

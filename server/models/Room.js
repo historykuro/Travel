@@ -20,7 +20,15 @@ const RoomSchema = new mongoose.Schema(
       required: true,
     },
     photo: {
-      type: String,
+      public_id: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
+      // type: String,
     },
     type: {
       type: String,
@@ -33,10 +41,7 @@ const RoomSchema = new mongoose.Schema(
       min: 1,
       max: 5,
     },
-    unavailableDates: {
-      type: [Number],
-      default: [],
-    },
+
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,

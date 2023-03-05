@@ -10,6 +10,8 @@ import {
 } from "react-icons/ai";
 import Time from "react-time-format";
 import ReactPaginate from "react-paginate";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const ListPlaces = () => {
   const id = useParams().id;
@@ -128,6 +130,7 @@ const ListPlaces = () => {
 
   return (
     <>
+      <Navbar />
       <div className="h-full w-full">
         <div className="text-center py-12 px-6 pt-20">
           <h1 className="font-display font-bold text-5xl mb-6 text-bg-main">
@@ -144,8 +147,8 @@ const ListPlaces = () => {
               <div key={index}>
                 <Link to={`/typeDetail/${item._id}`}>
                   <img
-                    src={`${item.photo}`}
-                    alt={item.photo}
+                    src={`${item.photo?.url}`}
+                    alt={item.photo?.url}
                     className="w-full h-52 md:h-64 lg:h-96 xl:h-64 object-cover"
                   />
                 </Link>
@@ -194,6 +197,7 @@ const ListPlaces = () => {
           />
         </div>
       </div>
+      <Footer />
     </>
   );
 };

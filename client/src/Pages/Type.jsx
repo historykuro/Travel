@@ -7,6 +7,8 @@ import axios from "axios";
 import { AiFillStar } from "react-icons/ai";
 import Time from "react-time-format";
 import ReactPaginate from "react-paginate";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Type = () => {
   const [estates, setEstates] = useState([]);
@@ -127,6 +129,7 @@ const Type = () => {
   );
   return (
     <>
+      <Navbar />
       <div className=" h-full w-full mx-0 ">
         <div className="wrapper h-full w-[90%] mx-auto my-0  pt-[5rem]">
           <div className="titles flex flex-col items-center justify-center gap-[12px] mb-[4rem] ">
@@ -145,8 +148,8 @@ const Type = () => {
                 className="place h-[450px] w-full bg-[#fff] rounded-xl mb-[7.5rem] relative transition-all shadow-y  ">
                 <div className="imgWrapper h-[300px] w-full overflow-hidden rounded-t-xl opacity-80 hover:opacity-100 duration-200 space-y-2 text-left ">
                   <img
-                    src={`${estate?.photo}`}
-                    alt={estate.photo}
+                    src={`${estate?.photo?.url}`}
+                    alt={estate.photo?.url}
                     className="w-full h-full object-cover rounded-t-lg hover:scale-[1.035]  bg-[black] transition-all  "
                   />
                 </div>
@@ -197,6 +200,7 @@ const Type = () => {
           />
         </div>
       </div>
+      <Footer />
     </>
   );
 };

@@ -96,8 +96,8 @@ const SuggestedPlaces = () => {
                 className="place h-[450px] w-full bg-[#fff] rounded-xl mb-[7.5rem] relative transition-all shadow-y  ">
                 <div className="imgWrapper h-[300px] w-full overflow-hidden rounded-t-xl opacity-80 hover:opacity-100 duration-200 space-y-2 text-left ">
                   <img
-                    src={suggestedPlace?.photo}
-                    alt={suggestedPlace.photo}
+                    src={suggestedPlace?.photo?.url}
+                    alt={suggestedPlace.photo?.url}
                     className="w-full h-full object-cover rounded-t-lg hover:scale-[1.035]  bg-[black] transition-all  "
                   />
                 </div>
